@@ -26,10 +26,11 @@ let move = 1;
 let game = false;
 let num = 9;
 let randomNum;
-let wingNum = 11;
+let wingNum = [];
 let wing = [];
 for (let i = 0; i < 2; i++) {
     wing[i] = false;
+    wingNum[i] = 11;
 }
 
 let TRexImg = [
@@ -78,19 +79,22 @@ setInterval(function () {
         else {
             TRex.src = TRexImg[0];
         }
-        for (let i = 0; i < 2; i++) {
-            if (wing[i]) {
-                obstacle[i].src = obstacleImg[wingNum];
-                if (wingNum == 11) {
-                    wingNum++;
-                }
-                else if (wingNum == 12) {
-                    wingNum--;
-                }
+    }
+}, 100);
+
+setInterval (function () {
+    for (let i = 0; i < 2; i++) {
+        if (wing[i]) {
+            obstacle[i].src = obstacleImg[wingNum[i]];
+            if (wingNum[i] == 11) {
+                wingNum[i]++;
+            }
+            else if (wingNum[i] == 12) {
+                wingNum[i]--;
             }
         }
     }
-}, 100);
+}, 200);
 
 setInterval(function () {
     if (game) {
@@ -111,22 +115,22 @@ setInterval(function () {
             }
 
         for (let i = 0; i < 2; i++) {
-            randomNum = getRandomIntInclusive(1, 3); 
+            randomNum = getRandomIntInclusive(0, 11); 
             if (obstacleX[i] <= -50) {
-                if (randomNum == 1) {
-                    obstacle[i].src = obstacleImg[getRandomIntInclusive(0, 5)];
+                if (randomNum >= 1 && randomNum <= 5) {
+                    obstacle[i].src = obstacleImg[randomNum];
                     wing[i] = false;
                     obstacleY[i] = 235;
                 }
-                else if (randomNum == 2){
-                    obstacle[i].src = obstacleImg[getRandomIntInclusive(6, 10)];
+                else if (randomNum >= 6 && randomNum <= 10) {
+                    obstacle[i].src = obstacleImg[randomNum];
                     wing[i] = false;
                     obstacleY[i] = 220;
                 }
                 else {
-                    obstacle[i].src = obstacleImg[11];
+                    obstacle[i].src = obstacleImg[randomNum];
                     wing[i] = true;
-                    obstacleY[i] = 150;
+                    obstacleY[i] = getRandomIntInclusive(150, 250);
                 }
                 obstacleX[i] = 750;
             }
