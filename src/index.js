@@ -49,7 +49,6 @@ let obstacleImg = [
 
 TRex.src = "../asset/img/T-Rex.png";
 floor.src = "../asset/img/floor.png";
-randomObstacle();
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -93,16 +92,20 @@ setInterval(function () {
             }
 
         for (let i = 0; i < 2; i++) {
-            
             if (obstacleX[i] <= -50) {
-                randomObstacle();
+                if (getRandomIntInclusive(1, 2) == 1) {
+                    obstacle[i].src = obstacleImg[getRandomIntInclusive(0, 5)];
+                    obstacleY[i] = 235;
+                }
+                else {
+                    obstacle[i].src = obstacleImg[getRandomIntInclusive(6, 10)];
+                    obstacleY[i] = 220;
+                }
                 obstacleX[i] = 750;
             }
+            obstacleX[i] -= 7;
         }
-
         floorX -= 7;
-        obstacleX[0] -= 7;
-        obstacleX[1] -= 7;
     }
     draw();
 }, 20);
@@ -119,25 +122,13 @@ function keyEvent(event) {
     }
 }
 
-function randomObstacle() {
-    for (let i = 0; i < 2; i++) {
-        if (getRandomIntInclusive(1, 2) == 1) {
-            obstacle[i].src = obstacleImg[getRandomIntInclusive(0, 5)];
-            obstacleY[i] = 235;
-        }
-        else {
-            obstacle[i].src = obstacleImg[getRandomIntInclusive(6, 10)];
-            obstacleY[i] = 220;
-        }
-    }
-}
-
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(floor, floorX, floorY);
     ctx.drawImage(TRex, TRexX, TRexY);
-    ctx.drawImage(obstacle[0], obstacleX[0], obstacleY[0]);
-    ctx.drawImage(obstacle[1], obstacleX[1], obstacleY[1]);
+    for (let i = 0; i < 2; i++) {
+        ctx.drawImage(obstacle[i], obstacleX[i], obstacleY[i]);
+    }
 }
 
 document.addEventListener('keydown', keyEvent);
