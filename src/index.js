@@ -130,7 +130,7 @@ setInterval(function () {
                 else {
                     obstacle[i].src = obstacleImg[randomNum];
                     wing[i] = true;
-                    obstacleY[i] = getRandomIntInclusive(150, 250);
+                    obstacleY[i] = getRandomIntInclusive(150, 230);
                 }
                 obstacleX[i] = 750;
             }
