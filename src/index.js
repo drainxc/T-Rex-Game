@@ -16,7 +16,7 @@ let jump = false;
 let bow = false;
 let move = 1;
 let game = false;
-let num = 8;
+let num = 9;
 
 let TRexImg = [
     "../asset/img/T-Rex.png",
@@ -70,8 +70,12 @@ setInterval(function () {
             jump = false;
         }
         if (!jump && TRexY != 225) {
-            TRexY += num;
             num += 0.5;
+            TRexY += num;
+        }
+        floorX -= 7;
+        if (floorX <= -2900) {
+            floorX = 0
         }
     }
     draw();
