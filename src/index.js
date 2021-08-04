@@ -25,6 +25,12 @@ let bow = false;
 let move = 1;
 let game = false;
 let num = 9;
+let randomNum;
+let wingNum = 11;
+let wing = [];
+for (let i = 0; i < 2; i++) {
+    wing[i] = false;
+}
 
 let TRexImg = [
     "../asset/img/T-Rex.png",
@@ -44,7 +50,9 @@ let obstacleImg = [
     "../asset/img/bigCactus2.png",
     "../asset/img/bigCactus3.png",
     "../asset/img/bigCactus4.png",
-    "../asset/img/bigCactus5.png"
+    "../asset/img/bigCactus5.png",
+    "../asset/img/bird1.png",
+    "../asset/img/bird2.png"
 ];
 
 TRex.src = "../asset/img/T-Rex.png";
@@ -70,6 +78,17 @@ setInterval(function () {
         else {
             TRex.src = TRexImg[0];
         }
+        for (let i = 0; i < 2; i++) {
+            if (wing[i]) {
+                obstacle[i].src = obstacleImg[wingNum];
+                if (wingNum == 11) {
+                    wingNum++;
+                }
+                else if (wingNum == 12) {
+                    wingNum--;
+                }
+            }
+        }
     }
 }, 100);
 
@@ -92,14 +111,22 @@ setInterval(function () {
             }
 
         for (let i = 0; i < 2; i++) {
+            randomNum = getRandomIntInclusive(1, 3); 
             if (obstacleX[i] <= -50) {
-                if (getRandomIntInclusive(1, 2) == 1) {
+                if (randomNum == 1) {
                     obstacle[i].src = obstacleImg[getRandomIntInclusive(0, 5)];
+                    wing[i] = false;
                     obstacleY[i] = 235;
                 }
-                else {
+                else if (randomNum == 2){
                     obstacle[i].src = obstacleImg[getRandomIntInclusive(6, 10)];
+                    wing[i] = false;
                     obstacleY[i] = 220;
+                }
+                else {
+                    obstacle[i].src = obstacleImg[11];
+                    wing[i] = true;
+                    obstacleY[i] = 150;
                 }
                 obstacleX[i] = 750;
             }
