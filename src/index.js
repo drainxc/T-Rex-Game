@@ -12,6 +12,7 @@ let TRexY = 225;
 let jump = false;
 let bow = false;
 let move = 1;
+let game = false;
 
 let TRexImg = [
     "../asset/img/T-Rex.png",
@@ -34,21 +35,25 @@ let cactusImg = [
     "../asset/img/bigCactus5.png",
 ];
 
-setInterval (function () {
-    TRex.src = TRexImg[move];
+TRex.src = "../asset/img/T-Rex.png";
+
+setInterval(function () {
+    if (game) {
+        TRex.src = TRexImg[move];
+        if (move == 1) {
+            move++;
+        }
+        else if (move == 2) {
+            move--;
+        }
+    }
     draw();
-    if (move == 1) {
-        move++;
-    }
-    else if (move == 2) {
-        move--;
-    }
 }, 100);
 
 function keyEvent(event) {
     console.log(event.key);
     if (event.key == ' ') {
-        jump = true;
+        game = true;
     }
     if (event.key == 'ArrowUp') {
         jump = true;
