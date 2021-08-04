@@ -5,15 +5,20 @@ canvas.width = 700;
 canvas.height = 300;
 
 let TRex = new Image();
-let obstacle = new Image();
+let obstacle = [];
 let floor = new Image();
+for (let i = 0; i < 2; i++) {
+    obstacle[i] = new Image();
+}
 
 let TRexX = 50;
 let TRexY = 225;
 let floorX = 0;
 let floorY = 260;
-let obstacleX = 1500;
-let obstacleY = 235;
+let obstacleX = [];
+let obstacleY = [];
+obstacleX[0] = 1350;
+obstacleX[1] = 1750;
 
 let jump = false;
 let bow = false;
@@ -39,7 +44,7 @@ let obstacleImg = [
     "../asset/img/bigCactus2.png",
     "../asset/img/bigCactus3.png",
     "../asset/img/bigCactus4.png",
-    "../asset/img/bigCactus5.png",
+    "../asset/img/bigCactus5.png"
 ];
 
 TRex.src = "../asset/img/T-Rex.png";
@@ -84,14 +89,20 @@ setInterval(function () {
         }
 
         if (floorX <= -2800) {
-            floorX = 0
+                floorX = 0
+            }
+
+        for (let i = 0; i < 2; i++) {
+            
+            if (obstacleX[i] <= -50) {
+                randomObstacle();
+                obstacleX[i] = 750;
+            }
         }
-        if (obstacleX <= -50) {
-            randomObstacle();
-            obstacleX = 750; 
-        }
+
         floorX -= 7;
-        obstacleX -= 7;
+        obstacleX[0] -= 7;
+        obstacleX[1] -= 7;
     }
     draw();
 }, 20);
@@ -109,13 +120,15 @@ function keyEvent(event) {
 }
 
 function randomObstacle() {
-    if (getRandomIntInclusive(1, 2) == 1) {
-        obstacle.src = obstacleImg[getRandomIntInclusive(0, 5)];
-        obstacleY = 235;
-    }
-    else  {
-        obstacle.src = obstacleImg[getRandomIntInclusive(6, 10)];
-        obstacleY = 220;
+    for (let i = 0; i < 2; i++) {
+        if (getRandomIntInclusive(1, 2) == 1) {
+            obstacle[i].src = obstacleImg[getRandomIntInclusive(0, 5)];
+            obstacleY[i] = 235;
+        }
+        else {
+            obstacle[i].src = obstacleImg[getRandomIntInclusive(6, 10)];
+            obstacleY[i] = 220;
+        }
     }
 }
 
@@ -123,7 +136,8 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(floor, floorX, floorY);
     ctx.drawImage(TRex, TRexX, TRexY);
-    ctx.drawImage(obstacle, obstacleX, obstacleY);
+    ctx.drawImage(obstacle[0], obstacleX[0], obstacleY[0]);
+    ctx.drawImage(obstacle[1], obstacleX[1], obstacleY[1]);
 }
 
 document.addEventListener('keydown', keyEvent);
