@@ -12,6 +12,9 @@ let TRexX = 50;
 let TRexY = 225;
 let floorX = 0;
 let floorY = 260;
+let cactusX = 1500;
+let cactusY = 235;
+
 let jump = false;
 let bow = false;
 let move = 1;
@@ -41,6 +44,13 @@ let cactusImg = [
 
 TRex.src = "../asset/img/T-Rex.png";
 floor.src = "../asset/img/floor.png";
+randomCactus();
+
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+} // 랜덤
 
 setInterval(function () {
     if (game) {
@@ -57,7 +67,6 @@ setInterval(function () {
             TRex.src = TRexImg[0];
         }
     }
-    draw();
 }, 100);
 
 setInterval(function () {
@@ -73,10 +82,16 @@ setInterval(function () {
             num += 0.5;
             TRexY += num;
         }
-        floorX -= 7;
-        if (floorX <= -2900) {
+
+        if (floorX <= -2800) {
             floorX = 0
         }
+        if (cactusX <= -50) {
+            randomCactus();
+            cactusX = 750; 
+        }
+        floorX -= 7;
+        cactusX -= 7;
     }
     draw();
 }, 20);
@@ -93,10 +108,22 @@ function keyEvent(event) {
     }
 }
 
+function randomCactus() {
+    if (getRandomIntInclusive(1, 2) == 1) {
+        cactus.src = cactusImg[getRandomIntInclusive(0, 5)];
+        cactusY = 235;
+    }
+    else  {
+        cactus.src = cactusImg[getRandomIntInclusive(6, 10)];
+        cactusY = 220;
+    }
+}
+
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(floor, floorX, floorY);
     ctx.drawImage(TRex, TRexX, TRexY);
+    ctx.drawImage(cactus, cactusX, cactusY);
 }
 
 document.addEventListener('keydown', keyEvent);
