@@ -1,0 +1,12 @@
+canvas {
+    background-color: white;
+    border: 1px black solid;
+}
+
+body {
+    margin: 0px;
+}
+
+#game {
+    justify-content: center;
+}
