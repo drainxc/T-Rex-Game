@@ -5,15 +5,15 @@ canvas.width = 700;
 canvas.height = 300;
 
 let TRex = new Image();
-let cactus = new Image();
+let obstacle = new Image();
 let floor = new Image();
 
 let TRexX = 50;
 let TRexY = 225;
 let floorX = 0;
 let floorY = 260;
-let cactusX = 1500;
-let cactusY = 235;
+let obstacleX = 1500;
+let obstacleY = 235;
 
 let jump = false;
 let bow = false;
@@ -28,7 +28,7 @@ let TRexImg = [
     "../asset/img/DeadT-Rex.png"
 ];
 
-let cactusImg = [
+let obstacleImg = [
     "../asset/img/cactus1.png",
     "../asset/img/cactus2.png",
     "../asset/img/cactus3.png",
@@ -44,7 +44,7 @@ let cactusImg = [
 
 TRex.src = "../asset/img/T-Rex.png";
 floor.src = "../asset/img/floor.png";
-randomCactus();
+randomObstacle();
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -86,12 +86,12 @@ setInterval(function () {
         if (floorX <= -2800) {
             floorX = 0
         }
-        if (cactusX <= -50) {
-            randomCactus();
-            cactusX = 750; 
+        if (obstacleX <= -50) {
+            randomObstacle();
+            obstacleX = 750; 
         }
         floorX -= 7;
-        cactusX -= 7;
+        obstacleX -= 7;
     }
     draw();
 }, 20);
@@ -108,14 +108,14 @@ function keyEvent(event) {
     }
 }
 
-function randomCactus() {
+function randomObstacle() {
     if (getRandomIntInclusive(1, 2) == 1) {
-        cactus.src = cactusImg[getRandomIntInclusive(0, 5)];
-        cactusY = 235;
+        obstacle.src = obstacleImg[getRandomIntInclusive(0, 5)];
+        obstacleY = 235;
     }
     else  {
-        cactus.src = cactusImg[getRandomIntInclusive(6, 10)];
-        cactusY = 220;
+        obstacle.src = obstacleImg[getRandomIntInclusive(6, 10)];
+        obstacleY = 220;
     }
 }
 
@@ -123,7 +123,7 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(floor, floorX, floorY);
     ctx.drawImage(TRex, TRexX, TRexY);
-    ctx.drawImage(cactus, cactusX, cactusY);
+    ctx.drawImage(obstacle, obstacleX, obstacleY);
 }
 
 document.addEventListener('keydown', keyEvent);
