@@ -6,9 +6,12 @@ canvas.height = 300;
 
 let TRex = new Image();
 let cactus = new Image();
+let floor = new Image();
 
 let TRexX = 50;
 let TRexY = 225;
+let floorX = 0;
+let floorY = 260;
 let jump = false;
 let bow = false;
 let move = 1;
@@ -37,6 +40,7 @@ let cactusImg = [
 ];
 
 TRex.src = "../asset/img/T-Rex.png";
+floor.src = "../asset/img/floor.png";
 
 setInterval(function () {
     if (game) {
@@ -87,6 +91,7 @@ function keyEvent(event) {
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(floor, floorX, floorY);
     ctx.drawImage(TRex, TRexX, TRexY);
 }
 
