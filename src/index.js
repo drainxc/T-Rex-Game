@@ -13,6 +13,7 @@ let jump = false;
 let bow = false;
 let move = 1;
 let game = false;
+let num = 10;
 
 let TRexImg = [
     "../asset/img/T-Rex.png",
@@ -50,13 +51,32 @@ setInterval(function () {
     draw();
 }, 100);
 
+setInterval(function () {
+    if (game) {
+        if (jump) {
+            TRexY -= num;
+            num -= 0.5;
+        }
+        if (num == 0) {
+            jump = false;
+        }
+        if (!jump && TRexY != 225) {
+            num += 0.5;
+            TRexY += num;
+        }
+    }
+    draw();
+}, 10);
+
 function keyEvent(event) {
     console.log(event.key);
     if (event.key == ' ') {
         game = true;
     }
     if (event.key == 'ArrowUp') {
-        jump = true;
+        if (TRexY == 225) {
+            jump = true;
+        }
     }
     if (event.key == 'ArrowDown') {
         bow = true;
