@@ -35,7 +35,7 @@ let TRexImg = [
     "../asset/img/T-RexMove1.png",
     "../asset/img/T-RexMove2.png",
     "../asset/img/DeadT-Rex.png"
-];
+]; // 플레이어 이미지
 
 let obstacleImg = [
     "../asset/img/cactus1.png",
@@ -51,7 +51,7 @@ let obstacleImg = [
     "../asset/img/bigCactus5.png",
     "../asset/img/bird1.png",
     "../asset/img/bird2.png"
-];
+]; // 장애물 이미지
 
 TRex.src = "../asset/img/T-Rex.png";
 floor.src = "../asset/img/floor.png";
@@ -72,14 +72,14 @@ setInterval(function () {
             else if (move == 2) {
                 move--;
             }
-        }
+        } // 플레이어 애니메이션
         else {
             TRex.src = TRexImg[0];
-        }
+        } // 플레이어 점프 시 애니메이션
     }
 }, 100);
 
-setInterval (function () {
+setInterval(function () {
     for (let i = 0; i < 2; i++) {
         if (wing[i]) {
             obstacle[i].src = obstacleImg[wingNum[i]];
@@ -90,7 +90,7 @@ setInterval (function () {
                 wingNum[i]--;
             }
         }
-    }
+    } // 새 애니메이션
 }, 200);
 
 setInterval(function () {
@@ -101,18 +101,18 @@ setInterval(function () {
         }
         if (num == 0) {
             jump = false;
-        }
+        } // 점프
         if (!jump && TRexY != 225) {
             num += 0.5;
             TRexY += num;
-        }
+        } // 점프 후
 
         if (floorX <= -2800) {
-                floorX = 0
-            }
+            floorX = 0
+        }
 
         for (let i = 0; i < 2; i++) {
-            randomNum = getRandomIntInclusive(0, 11); 
+            randomNum = getRandomIntInclusive(0, 11);
             if (obstacleX[i] <= -50) {
                 if (randomNum >= 1 && randomNum <= 5) {
                     obstacle[i].src = obstacleImg[randomNum];
@@ -130,10 +130,10 @@ setInterval(function () {
                     obstacleY[i] = getRandomIntInclusive(150, 230);
                 }
                 obstacleX[i] = 750;
-            }
-            obstacleX[i] -= 7;
+            } // 랜덤 장애물 생성
+            obstacleX[i] -= 7; // 장애물 이동
         }
-        floorX -= 7;
+        floorX -= 7; //바닥 이동
     }
     draw();
 }, 20);
@@ -143,11 +143,11 @@ function keyEvent(event) {
         game = true;
         if (TRexY == 225) {
             jump = true;
-        }
+        } // 점프
     }
     if (event.key == 'ArrowDown') {
         bow = true;
-    }
+    } // 숙이기
 }
 
 function draw() {
@@ -157,6 +157,6 @@ function draw() {
     for (let i = 0; i < 2; i++) {
         ctx.drawImage(obstacle[i], obstacleX[i], obstacleY[i]);
     }
-}
+} // 그리기
 
 document.addEventListener('keydown', keyEvent);
