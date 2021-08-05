@@ -7,9 +7,6 @@ canvas.height = 300;
 let TRex = new Image();
 let obstacle = [];
 let floor = new Image();
-for (let i = 0; i < 2; i++) {
-    obstacle[i] = new Image();
-}
 
 let TRexX = 50;
 let TRexY = 225;
@@ -17,8 +14,6 @@ let floorX = 0;
 let floorY = 260;
 let obstacleX = [];
 let obstacleY = [];
-obstacleX[0] = 1350;
-obstacleX[1] = 1750;
 
 let jump = false;
 let bow = false;
@@ -29,6 +24,8 @@ let randomNum;
 let wingNum = [];
 let wing = [];
 for (let i = 0; i < 2; i++) {
+    obstacle[i] = new Image();
+    obstacleX[i] = 1350 + (i * 400);
     wing[i] = false;
     wingNum[i] = 11;
 }
