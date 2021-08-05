@@ -56,6 +56,10 @@ let obstacleImg = [
 TRex.src = "../asset/img/T-Rex.png";
 floor.src = "../asset/img/floor.png";
 
+let jumpSound = new Audio('../asset/sound/jumpSound.mp3');
+let deathSound = new Audio('../asset/sound/deathSound.mp3');
+let pointSound = new Audio('../asset/sound/pointSound.mp3');
+
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -143,6 +147,7 @@ function keyEvent(event) {
         game = true;
         if (TRexY == 225) {
             jump = true;
+            jumpSound.play();
         } // 점프
     }
     if (event.key == 'ArrowDown') {
