@@ -72,13 +72,32 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 } // 랜덤
 
+function keydownEvent(event) {
+    if (event.key == ' ' || event.key == 'ArrowUp') {
+        game = true;
+        if (TRexY == 225) {
+            jump = true;
+            jumpSound.play();
+        } // 점프
+    }
+    if (event.key == 'ArrowDown') {
+        if (TRexY == 225) {
+            bow = true;
+            TRex.src = TRexBowImg[move];
+        }
+    } // 숙이기
+}
+
+function keyupEvent(event) {
+    if (event.key == 'ArrowDown') {
+        bow = false;
+    }
+}
+
 setInterval(function () {
     if (game) {
         if (!bow) {
             TRex.src = TRexImg[move];
-        }
-        else if (bow) {
-            TRex.src = TRexBowImg[move];
         }
         if (TRexY == 225) {
             if (move == 0) {
@@ -152,25 +171,6 @@ setInterval(function () {
     }
     draw();
 }, 20);
-
-function keydownEvent(event) {
-    if (event.key == ' ' || event.key == 'ArrowUp') {
-        game = true;
-        if (TRexY == 225) {
-            jump = true;
-            jumpSound.play();
-        } // 점프
-    }
-    if (event.key == 'ArrowDown') {
-        bow = true;
-    } // 숙이기
-}
-
-function keyupEvent(event) {
-    if (event.key == 'ArrowDown') {
-        bow = false;
-    }
-}
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
