@@ -95,6 +95,7 @@ function keyupEvent(event) {
     if (game) {
         if (event.key == 'ArrowDown') {
             bow = false;
+            TRex.src = TRexImg[move];
         }
     }
 }
