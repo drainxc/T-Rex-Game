@@ -14,13 +14,14 @@ let floorX = 0;
 let floorY = 260;
 let obstacleX = [];
 let obstacleY = [];
-let TRexBowY = 235;
+let TRexBowY = 240;
 
 let jump = false;
 let bow = false;
-let move = 0;
 let game = false;
+let move = 0;
 let num = 9;
+let gravity = 0.5;
 let randomNum;
 let wingNum = [];
 let wing = [];
@@ -80,17 +81,21 @@ function keydownEvent(event) {
             jumpSound.play();
         } // 점프
     }
-    if (event.key == 'ArrowDown') {
-        if (TRexY == 225) {
-            bow = true;
-            TRex.src = TRexBowImg[move];
-        }
-    } // 숙이기
+    if (game) {
+        if (event.key == 'ArrowDown') {
+            if (TRexY == 225) {
+                bow = true;
+                TRex.src = TRexBowImg[move];
+            }
+        } // 숙이기
+    }
 }
 
 function keyupEvent(event) {
-    if (event.key == 'ArrowDown') {
-        bow = false;
+    if (game) {
+        if (event.key == 'ArrowDown') {
+            bow = false;
+        }
     }
 }
 
@@ -131,13 +136,13 @@ setInterval(function () {
     if (game) {
         if (jump) {
             TRexY -= num;
-            num -= 0.5;
+            num -= gravity;
         }
         if (num == 0) {
             jump = false;
         } // 점프
         if (!jump && TRexY != 225) {
-            num += 0.5;
+            num += gravity;
             TRexY += num;
         } // 점프 후
 
@@ -178,7 +183,7 @@ function draw() {
     if (!bow) {
         ctx.drawImage(TRex, TRexX, TRexY);
     }
-    else if (bow){
+    else if (bow) {
         ctx.drawImage(TRex, TRexX, TRexBowY);
     }
     for (let i = 0; i < 2; i++) {
