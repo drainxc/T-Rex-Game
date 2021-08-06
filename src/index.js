@@ -14,6 +14,7 @@ let floorX = 0;
 let floorY = 260;
 let obstacleX = [];
 let obstacleY = [];
+let TRexBowY = 235;
 
 let jump = false;
 let bow = false;
@@ -34,8 +35,14 @@ let TRexImg = [
     "../asset/img/T-Rex.png",
     "../asset/img/T-RexMove1.png",
     "../asset/img/T-RexMove2.png",
-    "../asset/img/DeadT-Rex.png"
+    "../asset/img/DeadT-Rex.png",
 ]; // 플레이어 이미지
+
+
+let TRexBowImg = [
+    "../asset/img/T-RexBow1.png",
+    "../asset/img/T-RexBow2.png"
+]
 
 let obstacleImg = [
     "../asset/img/cactus1.png",
@@ -68,7 +75,12 @@ function getRandomIntInclusive(min, max) {
 
 setInterval(function () {
     if (game) {
-        TRex.src = TRexImg[move];
+        if (!bow) {
+            TRex.src = TRexImg[move];
+        }
+        else if (bow) {
+            TRex.src = TRexBowImg[move];
+        }
         if (TRexY == 225) {
             if (move == 1) {
                 move++;
@@ -142,7 +154,7 @@ setInterval(function () {
     draw();
 }, 20);
 
-function keyEvent(event) {
+function keydownEvent(event) {
     if (event.key == ' ' || event.key == 'ArrowUp') {
         game = true;
         if (TRexY == 225) {
@@ -155,13 +167,25 @@ function keyEvent(event) {
     } // 숙이기
 }
 
+function keyupEvent(event) {
+    if (event.key == 'ArrowDown') {
+        bow = false;
+    }
+}
+
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(floor, floorX, floorY);
-    ctx.drawImage(TRex, TRexX, TRexY);
+    if (!bow) {
+        ctx.drawImage(TRex, TRexX, TRexY);
+    }
+    else if (bow){
+        ctx.drawImage(TRex, TRexX, TRexBowY);
+    }
     for (let i = 0; i < 2; i++) {
         ctx.drawImage(obstacle[i], obstacleX[i], obstacleY[i]);
     }
 } // 그리기
 
-document.addEventListener('keydown', keyEvent);
+document.addEventListener('keydown', keydownEvent);
+document.addEventListener('keyup', keyupEvent);
