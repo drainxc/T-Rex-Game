@@ -18,7 +18,7 @@ let TRexBowY = 235;
 
 let jump = false;
 let bow = false;
-let move = 1;
+let move = 0;
 let game = false;
 let num = 9;
 let randomNum;
@@ -32,7 +32,6 @@ for (let i = 0; i < 2; i++) {
 }
 
 let TRexImg = [
-    "../asset/img/T-Rex.png",
     "../asset/img/T-RexMove1.png",
     "../asset/img/T-RexMove2.png",
     "../asset/img/DeadT-Rex.png",
@@ -82,15 +81,15 @@ setInterval(function () {
             TRex.src = TRexBowImg[move];
         }
         if (TRexY == 225) {
-            if (move == 1) {
+            if (move == 0) {
                 move++;
             }
-            else if (move == 2) {
+            else if (move == 1) {
                 move--;
             }
         } // 플레이어 애니메이션
         else {
-            TRex.src = TRexImg[0];
+            TRex.src = "../asset/img/T-Rex.png";
         } // 플레이어 점프 시 애니메이션
     }
 }, 100);
