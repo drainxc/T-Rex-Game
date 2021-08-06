@@ -87,6 +87,10 @@ function keydownEvent(event) {
                 bow = true;
                 TRex.src = TRexBowImg[move];
             }
+            else {
+                TRexY += 225 - TRexY;
+                num = 9;
+            }
         } // 숙이기
     }
 }
