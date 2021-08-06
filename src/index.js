@@ -88,10 +88,14 @@ function keydownEvent(event) {
                 TRex.src = TRexBowImg[move];
             }
             else {
+                jump = false;
                 TRexY += 225 - TRexY;
                 num = 9;
             }
         } // 숙이기
+    }
+    if (event.key == 'r') {
+        location.reload();
     }
 }
 
