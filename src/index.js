@@ -20,6 +20,7 @@ let TRexBowY = 240;
 let jump = false;
 let bow = false;
 let game = false;
+let death = false;
 let move = 0;
 let num = 9;
 let gravity = 0.5;
@@ -38,7 +39,7 @@ for (let i = 0; i < 2; i++) {
 for (let i = 0; i < 6; i++) {
     point[i] = new Image();
     point[i].src = "../asset/img/0.png";
-    pointNum[i] = 1;
+    pointNum[i] = 0;
 }
 
 let TRexImg = [];
@@ -87,7 +88,10 @@ function getRandomIntInclusive(min, max) {
 
 function keydownEvent(event) {
     if (event.key == ' ' || event.key == 'ArrowUp') {
-        game = true;
+        if (!game && !death) {
+            game = true;
+            pointIncrease();
+        }
         if (TRexY == 225) {
             jump = true;
             jumpSound.play();
@@ -210,24 +214,24 @@ setInterval(function () {
     draw();
 }, 20);
 
-for (let i = 100; i < 1000001; i *= 10) {
-    setInterval(function () {
-        if (game) {
+function pointIncrease() {
+    for (let i = 100; i < 1000001; i *= 10) {
+        setInterval(function () {
             for (j = 0; j < 5; j++) {
                 if (i == (100 * (10 ** j))) {
-                    point[j].src = pointImg[pointNum[j]];
                     pointNum[j]++;
+                    point[j].src = pointImg[pointNum[j]];
                 }
             }
             for (let j = 0; j < 5; j++) {
                 if (pointNum[j] > 9) {
                     pointNum[j] = 0;
+                    point[j].src = pointImg[pointNum[j]];
                 }
             }
-        }
-    }, i);
+        }, i);
+    }
 }
-
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
