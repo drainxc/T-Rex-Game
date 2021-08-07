@@ -39,21 +39,19 @@ for (let i = 0; i < 5; i++) {
     pointNum[i] = 1;
 }
 
-let TRexImg = [
-    "../asset/img/T-RexMove1.png",
-    "../asset/img/T-RexMove2.png",
-    "../asset/img/DeadT-Rex.png",
-]; // 플레이어 이미지
-
-
-let TRexBowImg = [
-    "../asset/img/T-RexBow1.png",
-    "../asset/img/T-RexBow2.png"
-]
-
-let obstacleImg = []; // 장애물 이미지
-
+let TRexImg = [];
+let TRexBowImg = [];
+let obstacleImg = []; 
 let pointImg = [];
+
+for (let i = 1; i <= 3; i++) {
+    if (i < 3) {
+        TRexImg.push(`../asset/img/T-RexMove${i}.png`)
+    }
+    else {
+        TRexImg.push("../asset/img/DeadT-Rex.png");
+    }
+}
 
 for (let i = 0; i < 13; i++) {
     if (i < 6)
@@ -66,6 +64,10 @@ for (let i = 0; i < 13; i++) {
 
 for (let i = 0; i < 10; i++) {
     pointImg.push(`../asset/img/${i}.png`);
+}
+
+for (let i = 1; i <= 2; i++) {
+    TRexBowImg.push(`../asset/img/T-RexBow${i}.png`)
 }
 
 TRex.src = "../asset/img/T-Rex.png";
