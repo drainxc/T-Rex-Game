@@ -43,7 +43,7 @@ for (let i = 0; i < 6; i++) {
 
 let TRexImg = [];
 let TRexBowImg = [];
-let obstacleImg = []; 
+let obstacleImg = [];
 let pointImg = [];
 
 for (let i = 1; i <= 3; i++) {
@@ -212,15 +212,17 @@ setInterval(function () {
 
 for (let i = 100; i < 1000001; i *= 10) {
     setInterval(function () {
-        for (j = 0; j < 5; j++) {
-            if (i == (100 * (10 ** j))) {
-                point[j].src = pointImg[pointNum[j]];
-                pointNum[j]++;
+        if (game) {
+            for (j = 0; j < 5; j++) {
+                if (i == (100 * (10 ** j))) {
+                    point[j].src = pointImg[pointNum[j]];
+                    pointNum[j]++;
+                }
             }
-        }
-        for (let j = 0; j < 5; j++) {
-            if (pointNum[j] > 9) {
-                pointNum[j] = 0;
+            for (let j = 0; j < 5; j++) {
+                if (pointNum[j] > 9) {
+                    pointNum[j] = 0;
+                }
             }
         }
     }, i);
