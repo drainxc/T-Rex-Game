@@ -211,27 +211,12 @@ setInterval(function () {
     draw();
 }, 20);
 
-for (let i = 100; i < 1000001; i *= 10) {
+for (let i = 100; i <= 1000000; i *= 10) {
     setInterval(function () {
-        if (i == 100) {
-            point[0].src = pointImg[pointNum[0]];
-            pointNum[0]++;
-        }
-        if (i == 1000) {
-            point[1].src = pointImg[pointNum[1]];
-            pointNum[1]++;
-        }
-        if (i == 10000) {
-            point[2].src = pointImg[pointNum[2]];
-            pointNum[2]++;
-        }
-        if (i == 100000) {
-            point[3].src = pointImg[pointNum[3]];
-            pointNum[3]++;
-        }
-        if (i == 1000000) {
-            point[4].src = pointImg[pointNum[4]];
-            pointNum[4]++;
+        for (j = 0; j < 5; j++) {
+            if (i == 100 * (10 ** j))
+            point[j].src = pointImg[pointNum[j]];
+            pointNum[j]++;
         }
         for (let j = 0; j < 5; j++) {
             if (pointNum[j] > 9) {
@@ -255,7 +240,7 @@ function draw() {
         ctx.drawImage(obstacle[i], obstacleX[i], obstacleY[i]);
     }
     for (let i = 0; i < 5; i++) {
-        ctx.drawImage(point[i], (600 - (i * 11)), 100);
+        ctx.drawImage(point[i], (650 - (i * 11)), 100);
     }
 } // 그리기
 
