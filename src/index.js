@@ -23,6 +23,7 @@ let game = false;
 let move = 0;
 let num = 9;
 let gravity = 0.5;
+let pointNum = [];
 let randomNum;
 let wingNum = [];
 let wing = [];
@@ -35,6 +36,7 @@ for (let i = 0; i < 2; i++) {
 for (let i = 0; i < 5; i++) {
     point[i] = new Image();
     point[i].src = "../asset/img/0.png";
+    pointNum[i] = 1;
 }
 
 let TRexImg = [
@@ -64,6 +66,19 @@ let obstacleImg = [
     "../asset/img/bird1.png",
     "../asset/img/bird2.png"
 ]; // 장애물 이미지
+
+let pointImg = [
+    "../asset/img/0.png",
+    "../asset/img/1.png",
+    "../asset/img/2.png",
+    "../asset/img/3.png",
+    "../asset/img/4.png",
+    "../asset/img/5.png",
+    "../asset/img/6.png",
+    "../asset/img/7.png",
+    "../asset/img/8.png",
+    "../asset/img/9.png"
+]
 
 TRex.src = "../asset/img/T-Rex.png";
 floor.src = "../asset/img/floor.png";
@@ -185,7 +200,7 @@ setInterval(function () {
                 else {
                     obstacle[i].src = obstacleImg[randomNum];
                     wing[i] = true;
-                    obstacleY[i] = getRandomIntInclusive(150, 230);
+                    obstacleY[i] = getRandomIntInclusive(150, 151);
                 }
                 obstacleX[i] = 750;
             } // 랜덤 장애물 생성
@@ -195,6 +210,37 @@ setInterval(function () {
     }
     draw();
 }, 20);
+
+for (let i = 100; i < 1000001; i *= 10) {
+    setInterval(function () {
+        if (i == 100) {
+            point[0].src = pointImg[pointNum[0]];
+            pointNum[0]++;
+        }
+        if (i == 1000) {
+            point[1].src = pointImg[pointNum[1]];
+            pointNum[1]++;
+        }
+        if (i == 10000) {
+            point[2].src = pointImg[pointNum[2]];
+            pointNum[2]++;
+        }
+        if (i == 100000) {
+            point[3].src = pointImg[pointNum[3]];
+            pointNum[3]++;
+        }
+        if (i == 1000000) {
+            point[4].src = pointImg[pointNum[4]];
+            pointNum[4]++;
+        }
+        for (let j = 0; j < 5; j++) {
+            if (pointNum[j] > 9) {
+                pointNum[j] = 0;
+            }
+        }
+    }, i);
+}
+
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -209,7 +255,7 @@ function draw() {
         ctx.drawImage(obstacle[i], obstacleX[i], obstacleY[i]);
     }
     for (let i = 0; i < 5; i++) {
-        ctx.drawImage(point[i], (600 + (i * 11)), 50);
+        ctx.drawImage(point[i], (600 - (i * 11)), 100);
     }
 } // 그리기
 
