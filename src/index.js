@@ -23,6 +23,8 @@ let game = false;
 let move = 0;
 let num = 9;
 let gravity = 0.5;
+let minimum = 1;
+let maximum = 10;
 let pointNum = [];
 let randomNum;
 let wingNum = [];
@@ -33,7 +35,7 @@ for (let i = 0; i < 2; i++) {
     wing[i] = false;
     wingNum[i] = 11;
 }
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 6; i++) {
     point[i] = new Image();
     point[i].src = "../asset/img/0.png";
     pointNum[i] = 1;
@@ -136,6 +138,7 @@ setInterval(function () {
         else {
             TRex.src = "../asset/img/T-Rex.png";
         } // 플레이어 점프 시 애니메이션
+        pointNum[5]++;
     }
 }, 100);
 
@@ -174,8 +177,14 @@ setInterval(function () {
             floorX = 0
         }
 
+        console.log(pointNum[5]);
+
+        if (pointNum[5] > 300) {
+            maximum = 11;
+        }
+
         for (let i = 0; i < 2; i++) {
-            randomNum = getRandomIntInclusive(0, 11);
+            randomNum = getRandomIntInclusive(minimum, maximum);
             if (obstacleX[i] <= -50) {
                 if (randomNum >= 1 && randomNum <= 5) {
                     obstacle[i].src = obstacleImg[randomNum];
@@ -190,7 +199,7 @@ setInterval(function () {
                 else {
                     obstacle[i].src = obstacleImg[randomNum];
                     wing[i] = true;
-                    obstacleY[i] = getRandomIntInclusive(150, 151);
+                    obstacleY[i] = getRandomIntInclusive(150, 230);
                 }
                 obstacleX[i] = 750;
             } // 랜덤 장애물 생성
@@ -224,7 +233,7 @@ function draw() {
     if (!bow) {
         ctx.drawImage(TRex, TRexX, TRexY);
     }
-    else if (bow) {
+    else {
         ctx.drawImage(TRex, TRexX, TRexBowY);
     }
     for (let i = 0; i < 2; i++) {
