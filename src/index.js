@@ -26,6 +26,7 @@ let num = 9;
 let gravity = 0.5;
 let minimum = 1;
 let maximum = 10;
+let nowPoint = 0;
 let pointNum = [];
 let randomNum;
 let wingNum = [];
@@ -142,8 +143,7 @@ setInterval(function () {
         else {
             TRex.src = "../asset/img/T-Rex.png";
         } // 플레이어 점프 시 애니메이션
-        pointNum[5]++;
-        console.log(pointNum[5]);
+        nowPoint++;
     }
 }, 100);
 
@@ -182,7 +182,7 @@ setInterval(function () {
             floorX = 0
         }
 
-        if (pointNum[5] > 300) {
+        if (nowPoint > 300) {
             maximum = 11;
         }
 
@@ -210,9 +210,6 @@ setInterval(function () {
         }
         floorX -= 7; //바닥 이동
     }
-    if (!(pointNum[5] % 100)) {
-        pointSound.play();
-    }
     draw();
 }, 20);
 
@@ -223,6 +220,9 @@ function pointIncrease() {
                 if (i == (100 * (10 ** j))) {
                     point[j].src = pointImg[pointNum[j]];
                     pointNum[j]++;
+                    if (j == 2) {
+                        pointSound.play();
+                    }
                 }
             }
             for (let j = 0; j < 5; j++) {
