@@ -51,23 +51,18 @@ let TRexBowImg = [
     "../asset/img/T-RexBow2.png"
 ]
 
-let obstacleImg = [
-    "../asset/img/cactus1.png",
-    "../asset/img/cactus2.png",
-    "../asset/img/cactus3.png",
-    "../asset/img/cactus4.png",
-    "../asset/img/cactus5.png",
-    "../asset/img/cactus6.png",
-    "../asset/img/bigCactus1.png",
-    "../asset/img/bigCactus2.png",
-    "../asset/img/bigCactus3.png",
-    "../asset/img/bigCactus4.png",
-    "../asset/img/bigCactus5.png",
-    "../asset/img/bird1.png",
-    "../asset/img/bird2.png"
-]; // 장애물 이미지
+let obstacleImg = []; // 장애물 이미지
 
 let pointImg = [];
+
+for (let i = 0; i < 13; i++) {
+    if (i < 6)
+        obstacleImg.push(`../asset/img/cactus${i + 1}.png`);
+    else if (i < 11)
+        obstacleImg.push(`../asset/img/bigCactus${i - 5}.png`);
+    else if (i < 13)
+        obstacleImg.push(`../asset/img/bird${i - 10}.png`);
+}
 
 for (let i = 0; i < 10; i++) {
     pointImg.push(`../asset/img/${i}.png`);
