@@ -67,18 +67,11 @@ let obstacleImg = [
     "../asset/img/bird2.png"
 ]; // 장애물 이미지
 
-let pointImg = [
-    "../asset/img/0.png",
-    "../asset/img/1.png",
-    "../asset/img/2.png",
-    "../asset/img/3.png",
-    "../asset/img/4.png",
-    "../asset/img/5.png",
-    "../asset/img/6.png",
-    "../asset/img/7.png",
-    "../asset/img/8.png",
-    "../asset/img/9.png"
-]
+let pointImg = [];
+
+for (let i = 0; i < 10; i++) {
+    pointImg.push(`../asset/img/${i}.png`);
+}
 
 TRex.src = "../asset/img/T-Rex.png";
 floor.src = "../asset/img/floor.png";
@@ -211,12 +204,13 @@ setInterval(function () {
     draw();
 }, 20);
 
-for (let i = 100; i <= 1000000; i *= 10) {
+for (let i = 100; i < 1000001; i *= 10) {
     setInterval(function () {
         for (j = 0; j < 5; j++) {
-            if (i == 100 * (10 ** j))
-            point[j].src = pointImg[pointNum[j]];
-            pointNum[j]++;
+            if (i == (100 * (10 ** j))) {
+                point[j].src = pointImg[pointNum[j]];
+                pointNum[j]++;
+            }
         }
         for (let j = 0; j < 5; j++) {
             if (pointNum[j] > 9) {
