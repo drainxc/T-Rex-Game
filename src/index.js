@@ -210,6 +210,9 @@ setInterval(function () {
         }
         floorX -= 7; //바닥 이동
     }
+    if (!(pointNum[5] % 100)) {
+        pointSound.play();
+    }
     draw();
 }, 20);
 
