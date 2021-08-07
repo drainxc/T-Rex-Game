@@ -7,6 +7,7 @@ canvas.height = 300;
 let TRex = new Image();
 let obstacle = [];
 let floor = new Image();
+let point = [];
 
 let TRexX = 50;
 let TRexY = 225;
@@ -30,6 +31,10 @@ for (let i = 0; i < 2; i++) {
     obstacleX[i] = 1350 + (i * 400);
     wing[i] = false;
     wingNum[i] = 11;
+}
+for (let i = 0; i < 5; i++) {
+    point[i] = new Image();
+    point[i].src = "../asset/img/0.png";
 }
 
 let TRexImg = [
@@ -202,6 +207,9 @@ function draw() {
     }
     for (let i = 0; i < 2; i++) {
         ctx.drawImage(obstacle[i], obstacleX[i], obstacleY[i]);
+    }
+    for (let i = 0; i < 5; i++) {
+        ctx.drawImage(point[i], (600 + (i * 11)), 50);
     }
 } // 그리기
 
