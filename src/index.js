@@ -39,7 +39,7 @@ for (let i = 0; i < 2; i++) {
 for (let i = 0; i < 6; i++) {
     point[i] = new Image();
     point[i].src = "../asset/img/0.png";
-    pointNum[i] = 0;
+    pointNum[i] = 1;
 }
 
 let TRexImg = [];
@@ -143,6 +143,7 @@ setInterval(function () {
             TRex.src = "../asset/img/T-Rex.png";
         } // 플레이어 점프 시 애니메이션
         pointNum[5]++;
+        console.log(pointNum[5]);
     }
 }, 100);
 
@@ -181,8 +182,6 @@ setInterval(function () {
             floorX = 0
         }
 
-        console.log(pointNum[5]);
-
         if (pointNum[5] > 300) {
             maximum = 11;
         }
@@ -219,14 +218,13 @@ function pointIncrease() {
         setInterval(function () {
             for (j = 0; j < 5; j++) {
                 if (i == (100 * (10 ** j))) {
-                    pointNum[j]++;
                     point[j].src = pointImg[pointNum[j]];
+                    pointNum[j]++;
                 }
             }
             for (let j = 0; j < 5; j++) {
                 if (pointNum[j] > 9) {
                     pointNum[j] = 0;
-                    point[j].src = pointImg[pointNum[j]];
                 }
             }
         }, i);
