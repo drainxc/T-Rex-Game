@@ -89,7 +89,7 @@ function keydownEvent(event) {
             }
             else {
                 jump = false;
-                TRexY += 225 - TRexY;
+                gravity = 1;
                 num = 9;
             }
         } // 숙이기
@@ -103,6 +103,8 @@ function keyupEvent(event) {
     if (game) {
         if (event.key == 'ArrowDown') {
             bow = false;
+            gravity = 0.5;
+            num = 9;
             TRex.src = TRexImg[move];
         }
     }
@@ -154,6 +156,9 @@ setInterval(function () {
             num += gravity;
             TRexY += num;
         } // 점프 후
+        if (TRexY >= 225) {
+            TRexY = 225;
+        }
 
         if (floorX <= -2800) {
             floorX = 0
