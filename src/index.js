@@ -95,12 +95,12 @@ function keydownEvent(event) {
             game = true;
             pointIncrease();
         }
-        if (TRexY == 225) {
+        if (TRexY == 225 && game && !death) {
             jump = true;
             jumpSound.play();
         } // 점프
     }
-    if (game) {
+    if (game && !death) {
         if (event.key == 'ArrowDown') {
             if (TRexY == 225) {
                 bow = true;
@@ -119,7 +119,7 @@ function keydownEvent(event) {
 }
 
 function keyupEvent(event) {
-    if (game) {
+    if (game && !death) {
         if (event.key == 'ArrowDown') {
             bow = false;
             gravity = 0.5;
@@ -130,7 +130,7 @@ function keyupEvent(event) {
 }
 
 setInterval(function () {
-    if (game) {
+    if (game && !death) {
         if (!bow) {
             TRex.src = TRexImg[move];
         }
@@ -164,7 +164,7 @@ setInterval(function () {
 }, 200);
 
 setInterval(function () {
-    if (game) {
+    if (game && !death) {
         if (jump) {
             TRexY -= num;
             num -= gravity;
