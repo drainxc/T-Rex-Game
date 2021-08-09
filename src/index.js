@@ -55,7 +55,7 @@ for (let i = 1; i <= 3; i++) {
     else {
         TRexImg.push("../asset/img/DeadT-Rex.png");
     }
-}
+} // TRex 이미지
 
 for (let i = 0; i < 13; i++) {
     if (i < 6)
@@ -64,18 +64,18 @@ for (let i = 0; i < 13; i++) {
         obstacleImg.push(`../asset/img/bigCactus${i - 5}.png`);
     else if (i < 13)
         obstacleImg.push(`../asset/img/bird${i - 10}.png`);
-}
+} // 장애물 이미지
 
 for (let i = 0; i < 10; i++) {
     pointImg.push(`../asset/img/${i}.png`);
-}
+} // 점수 이미지
 
 for (let i = 1; i <= 2; i++) {
     TRexBowImg.push(`../asset/img/T-RexBow${i}.png`)
-}
+} // 숙였을 때 TRex 이미지
 
 TRex.src = "../asset/img/T-Rex.png";
-floor.src = "../asset/img/floor.png";
+floor.src = "../asset/img/floor.png"; // 초기 이미지
 
 let jumpSound = new Audio('../asset/sound/jumpSound.mp3');
 let deathSound = new Audio('../asset/sound/deathSound.mp3');
@@ -113,7 +113,7 @@ function keydownEvent(event) {
     }
     if (event.key == 'r') {
         location.reload();
-    }
+    } // 재시작
 }
 
 function keyupEvent(event) {
@@ -123,7 +123,7 @@ function keyupEvent(event) {
             gravity = 0.5;
             num = 9;
             TRex.src = TRexImg[move];
-        }
+        } // 공중에서 화살표아래키를 눌렀을 때
     }
 }
 
@@ -166,25 +166,25 @@ setInterval(function () {
         if (jump) {
             TRexY -= num;
             num -= gravity;
-        }
+        } // 점프
         if (num == 0) {
             jump = false;
-        } // 점프
+        } 
         if (!jump && TRexY != 225) {
             num += gravity;
             TRexY += num;
         } // 점프 후
         if (TRexY >= 225) {
             TRexY = 225;
-        }
+        } // 맵 뚫기 방지
 
         if (floorX <= -2800) {
             floorX = 0
-        }
+        } // 바닥 이동
 
         if (nowPoint > 300) {
             maximum = 11;
-        }
+        } // 점수 300이상일 때 새 장애물 추가
 
         for (let i = 0; i < 2; i++) {
             randomNum = getRandomIntInclusive(minimum, maximum);
@@ -232,17 +232,17 @@ function pointIncrease() {
             }
         }, i);
     }
-}
+} // 점수 증가
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(floor, floorX, floorY);
     if (!bow) {
         ctx.drawImage(TRex, TRexX, TRexY);
-    }
+    } // 숙이지 않았을 때
     else {
         ctx.drawImage(TRex, TRexX, TRexBowY);
-    }
+    } // 숙였을 때
     for (let i = 0; i < 2; i++) {
         ctx.drawImage(obstacle[i], obstacleX[i], obstacleY[i]);
     }
