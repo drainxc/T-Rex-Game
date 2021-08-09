@@ -254,6 +254,7 @@ function pointIncrease() {
 function deathEvent() {
     if (!death && game) {
         deathSound.play();
+        TRex.src = TRexImg[2];
     }
     game = false;
     death = true;
