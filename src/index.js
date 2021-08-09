@@ -21,6 +21,8 @@ let jump = false;
 let bow = false;
 let game = false;
 let death = false;
+let obstacleDeath = [];
+let wing = [];
 let move = 0;
 let num = 9;
 let gravity = 0.5;
@@ -30,10 +32,10 @@ let nowPoint = 0;
 let pointNum = [];
 let randomNum;
 let wingNum = [];
-let wing = [];
 for (let i = 0; i < 2; i++) {
     obstacle[i] = new Image();
-    obstacleX[i] = 1350 + (i * 400);
+    obstacleX[i] = 950 + (i * 400);
+    obstacleDeath[i] = false; 
     wing[i] = false;
     wingNum[i] = 11;
 }
@@ -189,6 +191,7 @@ setInterval(function () {
         for (let i = 0; i < 2; i++) {
             randomNum = getRandomIntInclusive(minimum, maximum);
             if (obstacleX[i] <= -50) {
+                obstacleDeath[i] = true;
                 if (randomNum >= 1 && randomNum <= 5) {
                     obstacle[i].src = obstacleImg[randomNum];
                     wing[i] = false;
@@ -209,6 +212,11 @@ setInterval(function () {
             obstacleX[i] -= 7; // 장애물 이동
         }
         floorX -= 7; //바닥 이동
+    }
+    for (let i = 0; i < 2; i++) {
+        if (obstacleDeath[i] && (TRexX + 44 >= obstacleX[i]) && (TRexX <= obstacleX[i])) {
+            console.log('death');
+        }
     }
     draw();
 }, 20);
