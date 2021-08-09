@@ -214,8 +214,9 @@ setInterval(function () {
         floorX -= 7; //바닥 이동
     }
     for (let i = 0; i < 2; i++) {
-        if (obstacleDeath[i] && (TRexX + 44 >= obstacleX[i]) && (TRexX <= obstacleX[i])) {
-            console.log('death');
+        if (obstacleDeath[i] && (TRexX + 44 >= obstacleX[i]) && (TRexX <= obstacleX[i] + 17) && (TRexY + 47 >= obstacleY[i]) && (TRexY <= obstacleY[i] + 35)) {
+            game = false;
+            death = true;
         }
     }
     draw();
