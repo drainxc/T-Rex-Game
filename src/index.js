@@ -35,7 +35,7 @@ let wingNum = [];
 for (let i = 0; i < 2; i++) {
     obstacle[i] = new Image();
     obstacleX[i] = 950 + (i * 400);
-    obstacleDeath[i] = false; 
+    obstacleDeath[i] = false;
     wing[i] = false;
     wingNum[i] = 11;
 }
@@ -171,7 +171,7 @@ setInterval(function () {
         } // 점프
         if (num == 0) {
             jump = false;
-        } 
+        }
         if (!jump && TRexY != 225) {
             num += gravity;
             TRexY += num;
@@ -225,18 +225,20 @@ setInterval(function () {
 function pointIncrease() {
     for (let i = 100; i < 1000001; i *= 10) {
         setInterval(function () {
-            for (j = 0; j < 5; j++) {
-                if (i == (100 * (10 ** j))) {
-                    point[j].src = pointImg[pointNum[j]];
-                    pointNum[j]++;
-                    if (j == 2) {
-                        pointSound.play();
+            if (!death && game) {
+                for (j = 0; j < 5; j++) {
+                    if (i == (100 * (10 ** j))) {
+                        point[j].src = pointImg[pointNum[j]];
+                        pointNum[j]++;
+                        if (j == 2) {
+                            pointSound.play();
+                        }
                     }
                 }
-            }
-            for (let j = 0; j < 5; j++) {
-                if (pointNum[j] > 9) {
-                    pointNum[j] = 0;
+                for (let j = 0; j < 5; j++) {
+                    if (pointNum[j] > 9) {
+                        pointNum[j] = 0;
+                    }
                 }
             }
         }, i);
