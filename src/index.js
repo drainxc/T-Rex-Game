@@ -216,14 +216,12 @@ setInterval(function () {
     for (let i = 0; i < 2; i++) {
         if (!bow) {
             if (obstacleDeath[i] && (TRexX + 44 >= obstacleX[i]) && (TRexX <= obstacleX[i] + 17) && (TRexY + 47 >= obstacleY[i]) && (TRexY <= obstacleY[i] + 35)) {
-                game = false;
-                death = true;
+                deathEvent();
             }
         }
         else {
             if (obstacleDeath[i] && (TRexX + 59 >= obstacleX[i]) && (TRexX <= obstacleX[i] + 17) && (TRexBowY + 47 >= obstacleY[i]) && (TRexBowY <= obstacleY[i] + 35)) {
-                game = false;
-                death = true;
+                deathEvent();
             }
         }
     }
@@ -252,6 +250,12 @@ function pointIncrease() {
         }, i);
     }
 } // 점수 증가
+
+function deathEvent() {
+    game = false;
+    death = true;
+    deathSound.play();
+}
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
