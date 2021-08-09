@@ -252,9 +252,11 @@ function pointIncrease() {
 } // 점수 증가
 
 function deathEvent() {
+    if (!death && game) {
+        deathSound.play();
+    }
     game = false;
     death = true;
-    deathSound.play();
 }
 
 function draw() {
