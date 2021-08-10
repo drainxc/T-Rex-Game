@@ -43,7 +43,7 @@ for (let i = 0; i < 6; i++) {
     point[i] = new Image();
     point[i].src = "../asset/img/0.png";
     pointNum[i] = 1;
-}
+} // 점수 이미지
 
 let TRexImg = [];
 let TRexBowImg = [];
@@ -81,7 +81,7 @@ floor.src = "../asset/img/floor.png"; // 초기 이미지
 
 let jumpSound = new Audio('../asset/sound/jumpSound.mp3');
 let deathSound = new Audio('../asset/sound/deathSound.mp3');
-let pointSound = new Audio('../asset/sound/pointSound.mp3');
+let pointSound = new Audio('../asset/sound/pointSound.mp3'); // 사운드
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -94,7 +94,7 @@ function keydownEvent(event) {
         if (!game && !death) {
             game = true;
             pointIncrease();
-        }
+        } // 한 번만 실행
         if (TRexY == 225 && game && !death) {
             jump = true;
             jumpSound.play();
@@ -218,12 +218,12 @@ setInterval(function () {
             if (obstacleDeath[i] && (TRexX + 44 >= obstacleX[i]) && (TRexX <= obstacleX[i] + 17) && (TRexY + 47 >= obstacleY[i]) && (TRexY <= obstacleY[i] + 35)) {
                 deathEvent();
             }
-        }
+        } // 일어나 있을 때 히트박스
         else {
             if (obstacleDeath[i] && (TRexX + 59 >= obstacleX[i]) && (TRexX <= obstacleX[i] + 17) && (TRexBowY + 47 >= obstacleY[i]) && (TRexBowY <= obstacleY[i] + 35)) {
                 deathEvent();
             }
-        }
+        } // 숙였을 때 히트박스
     }
     draw();
 }, 20);
@@ -258,7 +258,7 @@ function deathEvent() {
     }
     game = false;
     death = true;
-}
+} // 죽었을 때
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
