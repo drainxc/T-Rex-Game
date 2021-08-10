@@ -31,6 +31,7 @@ let gravity = 0.5;
 let minimum = 1;
 let maximum = 10;
 let nowPoint = 0;
+let speed = 6;
 let pointNum = [];
 let randomNum;
 let wingNum = [];
@@ -99,6 +100,9 @@ function keydownEvent(event) {
             game = true;
             pointIncrease();
         } // 한 번만 실행
+        else if (!game && death) {
+            location.reload();
+        }
         if (TRexY == 225 && game && !death) {
             jump = true;
             jumpSound.play();
@@ -156,6 +160,10 @@ setInterval(function () {
             TRex.src = "../asset/img/T-Rex.png";
         } // 플레이어 점프 시 애니메이션
         nowPoint++;
+        if (nowPoint % 100 == 0) {
+            speed += 0.5;
+            console.log('asdf');
+        }
     }
 }, 100);
 
@@ -194,7 +202,7 @@ setInterval(function () {
             floorX = 0
         } // 바닥 이동
 
-        if (nowPoint > 300) {
+        if (nowPoint >= 300) {
             maximum = 11;
         } // 점수 300이상일 때 새 장애물 추가
 
@@ -219,9 +227,9 @@ setInterval(function () {
                 }
                 obstacleX[i] = 750;
             } // 랜덤 장애물 생성
-            obstacleX[i] -= 7; // 장애물 이동
+            obstacleX[i] -= speed; // 장애물 이동
         }
-        floorX -= 7; //바닥 이동
+        floorX -= speed; //바닥 이동
     }
     for (let i = 0; i < 2; i++) {
         if (!bow) {
