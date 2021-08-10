@@ -272,6 +272,7 @@ function pointIncrease() {
 function deathEvent() {
     if (!death && game) {
         deathSound.play();
+        bow = false;
         TRex.src = TRexImg[2];
     }
     game = false;
