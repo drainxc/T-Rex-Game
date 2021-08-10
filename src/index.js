@@ -9,6 +9,7 @@ let obstacle = [];
 let floor = new Image();
 let point = [];
 let gameover = new Image();
+let restart = new Image();
 
 let TRexX = 50;
 let TRexY = 225;
@@ -79,6 +80,7 @@ for (let i = 1; i <= 2; i++) {
 
 TRex.src = "../asset/img/T-Rex.png";
 floor.src = "../asset/img/floor.png"; 
+restart.src = "../asset/img/restart.png";
 gameover.src = "../asset/img/gameover.png"; // 초기 이미지
 
 let jumpSound = new Audio('../asset/sound/jumpSound.mp3');
@@ -128,6 +130,12 @@ function keyupEvent(event) {
             num = 9;
             TRex.src = TRexImg[move];
         } // 공중에서 화살표아래키를 눌렀을 때
+    }
+}
+
+function clickEvent() {
+    if (!game && death) {
+        location.reload();
     }
 }
 
@@ -279,8 +287,10 @@ function draw() {
     }
     if (!game && death) {
         ctx.drawImage(gameover, 250, (canvas.height / 2));
+        ctx.drawImage(restart, 330, (canvas.height / 2) + 40)
     }
 } // 그리기
 
+canvas.addEventListener('click', clickEvent);
 document.addEventListener('keydown', keydownEvent);
 document.addEventListener('keyup', keyupEvent);
