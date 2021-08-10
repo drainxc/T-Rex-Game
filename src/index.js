@@ -8,6 +8,7 @@ let TRex = new Image();
 let obstacle = [];
 let floor = new Image();
 let point = [];
+let gameover = new Image();
 
 let TRexX = 50;
 let TRexY = 225;
@@ -77,7 +78,8 @@ for (let i = 1; i <= 2; i++) {
 } // 숙였을 때 TRex 이미지
 
 TRex.src = "../asset/img/T-Rex.png";
-floor.src = "../asset/img/floor.png"; // 초기 이미지
+floor.src = "../asset/img/floor.png"; 
+gameover.src = "../asset/img/gameover.png"; // 초기 이미지
 
 let jumpSound = new Audio('../asset/sound/jumpSound.mp3');
 let deathSound = new Audio('../asset/sound/deathSound.mp3');
@@ -274,6 +276,9 @@ function draw() {
     }
     for (let i = 0; i < 5; i++) {
         ctx.drawImage(point[i], (650 - (i * 11)), 100);
+    }
+    if (!game && death) {
+        ctx.drawImage(gameover, 250, (canvas.height / 2));
     }
 } // 그리기
 
