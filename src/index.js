@@ -140,7 +140,7 @@ function keyupEvent(event) {
 function clickEvent() {
     if (!game && death) {
         location.reload();
-    }
+    } // 게임 다시 시작
 }
 
 setInterval(function () {
@@ -162,8 +162,7 @@ setInterval(function () {
         nowPoint++;
         if (nowPoint % 100 == 0) {
             speed += 0.5;
-            console.log('asdf');
-        }
+        } // 100점 마다 스피드 증가
     }
 }, 100);
 
